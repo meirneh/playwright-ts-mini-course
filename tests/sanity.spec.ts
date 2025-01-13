@@ -1,14 +1,16 @@
 import { test, expect } from '@playwright/test';
+import LoginPage from '../pages/LoginPage';
+import UserCredentials from '../helpers/UserCredentials';
+import ApplicationURL from '../helpers/ApplicationURL';
+// import { url } from 'inspector/promises';
+
+let username: string = UserCredentials.STANDARD_USER
+let password: string = UserCredentials.CORRECT_PASSWORD
 
 test('sanity test', async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="login-credentials"]').click();
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="login-password"]').click();
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  const loginPage = new LoginPage(page)
+  await loginPage.loginToApplication()
+
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
   await page.locator('[data-test="add-to-cart-sauce-labs-bike-light"]').click();
   await page.locator('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click();
@@ -28,3 +30,15 @@ test('sanity test', async ({ page }) => {
   await page.locator('[data-test="reset-sidebar-link"]').click();
   await page.locator('[data-test="logout-sidebar-link"]').click();
 });
+
+test('demo test1', async ({ page }) => {
+  const loginPage = new LoginPage(page)
+  await loginPage.loginToApplication()
+})
+
+test('demo test2', async ({ page }) => {
+  const loginPage = new LoginPage(page)
+  await loginPage.loginToApplication()
+  await loginPage.validatePageUrl(`${ApplicationURL.BASE_URL}inventory.html`)
+  
+})
