@@ -1,11 +1,7 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
-import UserCredentials from '../helpers/UserCredentials';
 import ApplicationURL from '../helpers/ApplicationURL';
 import ProductsPage from '../pages/ProductsPage';
-
-let username: string = UserCredentials.STANDARD_USER
-let password: string = UserCredentials.CORRECT_PASSWORD
 
 test('sanity test', async ({ page }) => {
   const loginPage = new LoginPage(page)
