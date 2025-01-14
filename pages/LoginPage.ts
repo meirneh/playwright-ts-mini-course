@@ -1,17 +1,22 @@
 import { expect, Locator, Page } from "@playwright/test";
 import UserCredentials from "../helpers/UserCredentials";
 import ApplicationURL from '../helpers/ApplicationURL';
+import { ErrorMessages } from "../helpers/ErrorMessages";
+import { BasePage } from "./BasePage";
 
-export default class LoginPage {
-    usernameField: Locator;
-    passwordField: Locator;
-    loginButton: Locator;
+export default class LoginPage extends BasePage {
+    private usernameField: Locator;
+    private passwordField: Locator;
+    private loginButton: Locator;
+    private errorMessage: Locator
 
 
     constructor(protected page: Page) {
+        super(page)
         this.usernameField = this.page.locator('[data-test="username"]')
         this.passwordField = this.page.locator('[data-test="password"]')
         this.loginButton = this.page.locator('[data-test="login-button"]')
+        this.errorMessage = this.page.locator("[data-test='error']")
     }
 
     public async loginToApplication(username = UserCredentials.STANDARD_USER,
@@ -21,10 +26,9 @@ export default class LoginPage {
         await this.usernameField.fill(username);
         await this.passwordField.fill(password);
         await this.loginButton.click();
-        await this.validatePageUrl(`${ApplicationURL.BASE_URL}inventory.html`)
     }
 
-    public async validatePageUrl(url : string) {
-      await expect(this.page).toHaveURL(url )
+    public async validateErrorMessage(errorMessage: ErrorMessages) {
+        await this.validateElementText(this.errorMessage, errorMessage.valueOf())
     }
 }
