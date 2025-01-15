@@ -29,6 +29,13 @@ export abstract class BasePage {
         await this.validateElementText(this.page.locator('.title'), title)
     }
 
+    protected async fillText(element: Locator, textToFill:string) {
+        await test.step(`Filling '${textToFill}' into the '${element}'`, async () => {
+            await element.fill(textToFill)
+        })
+        
+    }
+
 
 
 }
