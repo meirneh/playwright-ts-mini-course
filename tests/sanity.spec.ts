@@ -56,6 +56,7 @@ test.describe('Sanity Test Block', () => {
     await checkoutCompletePage.validateTitle(PageTitles.CHECKOUT_COMPLETE_PAGE)
     await checkoutCompletePage.validateFinalMessage('Thank you for your order!')
     await checkoutCompletePage.goBackToProducts()
+    
     await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
     await productsPage.validateTitle(PageTitles.INVENTORY_PAGE)
   }); 
