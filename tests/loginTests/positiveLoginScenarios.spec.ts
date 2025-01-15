@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import LoginPage from "../../pages/LoginPage";
 import ApplicationURL from '../../helpers/ApplicationURL';
 import ProductsPage from "../../pages/ProductsPage";
+import PageTitles from "../../helpers/pageTitles";
 
 
 test.describe('Positive Login Scenarios', () => {
@@ -12,35 +13,37 @@ test.describe('Positive Login Scenarios', () => {
         productsPage = new ProductsPage(page)
     })
 
+    test.afterEach(async () => {
+        await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
+        await productsPage.validateTitle(PageTitles.INVENTORY_PAGE)  
+    })
+    
+
     test('Login with standard_user', async () => {
 
         await loginPage.loginToApplication(process.env.STANDARD_USER, process.env.CORRECT_PASSWORD)
-        await loginPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
-        await productsPage.validateTitle('Products')
+        // await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)     
     })
 
     test('Login with problem_user', async () => {
         await loginPage.loginToApplication(process.env.PROBLEM_USER)
-        await loginPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
-        await productsPage.validateTitle('Products')
+        // await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)     
     })
 
     test('Login with performance_glitch_user', async () => {
         await loginPage.loginToApplication(process.env.PERFORMANCE_GLITCH_USER)
-        await loginPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
-        await productsPage.validateTitle('Products')
+        // await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)   
     })
 
     test('Login with error_user', async () => {
         await loginPage.loginToApplication(process.env.ERROR_USER)
-        await loginPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
-        await productsPage.validateTitle('Products')
+        // await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
+    
     })
 
     test('Login with visual_user', async () => {
         await loginPage.loginToApplication(process.env.VISUAL_USER)
-        await loginPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
-        await productsPage.validateTitle('Products')
+        // await productsPage.validatePageUrl(ApplicationURL.INVENTORY_URL)
     })
 
 
