@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
 import ApplicationURL from '../helpers/ApplicationURL';
 import ProductsPage from '../pages/ProductsPage';
-import YourCartPage from '../pages/YourCartPage';
 import CheckoutYourInformationPage from '../pages/CheckoutYourInformationPage';
 import PageTitles from '../helpers/PageTitles';
 import CheckoutOverviewPage from '../pages/CheckoutOverviewPage';
 import CheckoutCompletePage from '../pages/CheckoutCompletePage';
+import YourCartPage from '../pages/YourCartPage';
 
 test.describe('Sanity Test Block', () => {
 
